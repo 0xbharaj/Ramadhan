@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wajir Ramadan 2026 Calendar</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #f4f7f6; color: #333; padding: 20px; text-align: center; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .countdown { font-size: 1.5rem; font-weight: bold; color: #2c7a7b; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: center; }
+        th { background: #2c7a7b; color: white; }
+        input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        .highlight { background-color: #e6fffa; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Ramadan 2026: Wajir, Kenya</h2>
+    <div id="countdown" class="countdown">Loading countdown...</div>
+    
+    <input type="text" id="dateSearch" onkeyup="filterTable()" placeholder="Search by date (e.g., Feb 19)...">
+
+    <table id="ramadanTable">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Date</th>
+                <th>Suhoor</th>
+                <th>Iftar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="highlight">
+                <td>1</td>
+                <td>Feb 19</td>
+                <td>5:22 AM</td>
+                <td>6:36 PM</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Feb 20</td>
+                <td>5:22 AM</td>
+                <td>6:36 PM</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Feb 21</td>
+                <td>5:21 AM</td>
+                <td>6:36 PM</td>
+            </tr>
+            </tbody>
+    </table>
+</div>
+
+<script>
+    // Countdown Timer
+    const ramadanStart = new Date("Feb 18, 2026 18:30:00").getTime();
+
+    const timer = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = ramadanStart - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        
+        if (distance < 0) {
+            clearInterval(timer);
+            document.getElementById("countdown").innerHTML = "Ramadan Kareem!";
+        } else {
+            document.getElementById("countdown").innerHTML = days + "d " + hours + "h until Ramadan";
+        }
+    }, 1000);
+
+    // Simple Search Filter
+    function filterTable() {
+        const input = document.getElementById("dateSearch");
+        const filter = input.value.toUpperCase();
+        const table = document.getElementById("ramadanTable");
+        const tr = table.getElementsByTagName("tr");
+
+        for (let i = 1; i < tr.length; i++) {
+            let td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                let txtValue = td.textContent || td.innerText;
+                tr[i].style.display = txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
